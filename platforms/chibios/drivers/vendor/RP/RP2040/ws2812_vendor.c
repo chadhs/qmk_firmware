@@ -191,7 +191,9 @@ bool ws2812_init(void) {
                             (pio_idx == 0 ? PAL_MODE_ALTERNATE_PIO0 : PAL_MODE_ALTERNATE_PIO1);
     // clang-format on
 
-    palSetLineMode(WS2812_DI_PIN, rgb_pin_mode);
+    // ↓ this is what was in master but is broken ↓
+    /* palSetLineMode(WS2812_DI_PIN, rgb_pin_mode); */
+    palSetLineMode(RGB_DI_PIN, rgb_pin_mode);
 
     STATE_MACHINE = pio_claim_unused_sm(pio, true);
     if (STATE_MACHINE < 0) {
@@ -201,11 +203,15 @@ bool ws2812_init(void) {
 
     uint offset = pio_add_program(pio, &ws2812_program);
 
-    pio_sm_set_consecutive_pindirs(pio, STATE_MACHINE, WS2812_DI_PIN, 1, true);
+    // ↓ this is what was in master but is broken ↓
+    /* pio_sm_set_consecutive_pindirs(pio, STATE_MACHINE, WS2812_DI_PIN, 1, true); */
+    pio_sm_set_consecutive_pindirs(pio, STATE_MACHINE, RGB_DI_PIN, 1, true);
 
     pio_sm_config config = pio_get_default_sm_config();
     sm_config_set_wrap(&config, offset + WS2812_WRAP_TARGET, offset + WS2812_WRAP);
-    sm_config_set_sideset_pins(&config, WS2812_DI_PIN);
+    // ↓ this is what was in master but is broken ↓
+    /* sm_config_set_sideset_pins(&config, WS2812_DI_PIN); */
+    sm_config_set_sideset_pins(&config, RGB_DI_PIN);
     sm_config_set_fifo_join(&config, PIO_FIFO_JOIN_TX);
 
 #if defined(WS2812_EXTERNAL_PULLUP)
