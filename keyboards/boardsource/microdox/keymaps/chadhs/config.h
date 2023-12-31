@@ -10,10 +10,9 @@
 #define HOLD_ON_OTHER_KEY_PRESS
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
-// Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
-// https://docs.qmk.fm/#/tap_hold?id=tapping-force-hold
-#define TAPPING_FORCE_HOLD
-#define TAPPING_FORCE_HOLD_PER_KEY
+// Tapping Force Hold is now the default behavior and the timing can be tweaked per key
+// https://docs.qmk.fm/#/tap_hold?id=quick-tap-term
+#define QUICK_TAP_TERM_PER_KEY
 
 // Allow modifiers to be activated within the typing term
 #define PERMISSIVE_HOLD

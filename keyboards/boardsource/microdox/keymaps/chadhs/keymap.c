@@ -309,16 +309,17 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// TODO: address breaking changes when pulling latest master
-// https://github.com/qmk/qmk_firmware/blob/master/docs/ChangeLog/20230226.md
-bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
+// double tap to repeat keys that also have a hold function is now default behavior
+// timing can be tweaked per hey as needed
+// https://docs.qmk.fm/#/tap_hold?id=quick-tap-term
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case NUM_BSPC:
         case FUN_SPC:
         case CMD_ENT:
-            return false;
+            return QUICK_TAP_TERM - 50;
         default:
-            return true;
+            return QUICK_TAP_TERM;
     }
 }
 

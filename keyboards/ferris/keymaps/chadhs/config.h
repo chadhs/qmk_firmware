@@ -10,10 +10,9 @@
 #define HOLD_ON_OTHER_KEY_PRESS
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
-// Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
-// https://docs.qmk.fm/#/tap_hold?id=tapping-force-hold
-#define TAPPING_FORCE_HOLD
-#define TAPPING_FORCE_HOLD_PER_KEY
+// Tapping Force Hold is now the default behavior and the timing can be tweaked per key
+// https://docs.qmk.fm/#/tap_hold?id=quick-tap-term
+#define QUICK_TAP_TERM_PER_KEY
 
 // Allow modifiers to be activated within the typing term
 #define PERMISSIVE_HOLD
@@ -40,7 +39,7 @@
 #define RGBLIGHT_LIMIT_VAL 72
 #define RGBLED_NUM 2
 #define RGBLED_SPLIT { 1, 1 }
-#define RGB_DI_PIN 25
+#define WS2812_DI_PIN 25 // renamed from RGB_DI_PIN
 #define RGBLIGHT_EFFECT_RGB_TEST // at least one animation has to be enabled
 
 // https://docs.qmk.fm/#/feature_caps_word?id=customizing-caps-word
