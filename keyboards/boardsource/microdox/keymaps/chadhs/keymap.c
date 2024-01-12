@@ -229,7 +229,7 @@ void matrix_scan_user(void) {
 }
 
 /* tap dance configuration */
-void dance_kvm_1 (qk_tap_dance_state_t *state, void *user_data) {
+void dance_kvm_1 (tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         SEND_STRING(SS_TAP(X_A));
         reset_tap_dance (state);
@@ -238,7 +238,7 @@ void dance_kvm_1 (qk_tap_dance_state_t *state, void *user_data) {
         reset_tap_dance (state);
     }
 }
-void dance_kvm_2 (qk_tap_dance_state_t *state, void *user_data) {
+void dance_kvm_2 (tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         SEND_STRING(SS_TAP(X_R));
         reset_tap_dance (state);
@@ -247,7 +247,7 @@ void dance_kvm_2 (qk_tap_dance_state_t *state, void *user_data) {
         reset_tap_dance (state);
     }
 }
-void dance_kvm_3 (qk_tap_dance_state_t *state, void *user_data) {
+void dance_kvm_3 (tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         SEND_STRING(SS_TAP(X_S));
         reset_tap_dance (state);
@@ -256,7 +256,7 @@ void dance_kvm_3 (qk_tap_dance_state_t *state, void *user_data) {
         reset_tap_dance (state);
     }
 }
-void dance_kvm_4 (qk_tap_dance_state_t *state, void *user_data) {
+void dance_kvm_4 (tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         SEND_STRING(SS_TAP(X_T));
         reset_tap_dance (state);
@@ -266,7 +266,7 @@ void dance_kvm_4 (qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
     [TD_KVM_1] = ACTION_TAP_DANCE_FN(dance_kvm_1),
     [TD_KVM_2] = ACTION_TAP_DANCE_FN(dance_kvm_2),
     [TD_KVM_3] = ACTION_TAP_DANCE_FN(dance_kvm_3),
@@ -276,46 +276,50 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 /* per key configuration */
 
 // https://precondition.github.io/home-row-mods#finding-the-sweet-spot
-bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+// https://docs.qmk.fm/#/tap_hold?id=hold-on-other-key-press
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-    case CMD_TAB:  // make CMD SPC faster
-    case SFT_Z:    // make bottom row SFT faster
-    case SFT_SLSH: // make bottom row SFT faster
-    case SFT_BSLS: // make bottom row SFT faster
-        return false;
-    default:
-        return true;
+        case CMD_TAB:  // make CMD SPC faster
+        case SFT_Z:    // make bottom row SFT faster
+        case SFT_SLSH: // make bottom row SFT faster
+        case SFT_BSLS: // make bottom row SFT faster
+            // Immediately select the hold action when another key is pressed.
+            return true;
+        default:
+            // Do not select the hold action when another key is pressed.
+            return false;
     }
 }
 
 // https://precondition.github.io/home-row-mods#finding-the-sweet-spot
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-    /* adjust home row key timing to prevent letter rolls triggering modifiers */
-    case HOME_A:
-    case HOME_R:
-    case HOME_S:
-    case HOME_T:
-    case HOME_N:
-    case HOME_E:
-    case HOME_I:
-    case HOME_O:
-        return TAPPING_TERM + 75;
-    default:
-        return TAPPING_TERM;
+        /* adjust home row key timing to prevent letter rolls triggering modifiers */
+        case HOME_A:
+        case HOME_R:
+        case HOME_S:
+        case HOME_T:
+        case HOME_N:
+        case HOME_E:
+        case HOME_I:
+        case HOME_O:
+            return TAPPING_TERM + 75;
+        default:
+            return TAPPING_TERM;
     }
 }
 
-// TODO: address breaking changes when pulling latest master
-// https://github.com/qmk/qmk_firmware/blob/master/docs/ChangeLog/20230226.md
-bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
+// double tap to repeat keys that also have a hold function is now default behavior
+// timing can be tweaked per hey as needed
+// https://docs.qmk.fm/#/tap_hold?id=quick-tap-term
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case NUM_BSPC:
         case FUN_SPC:
         case CMD_ENT:
-            return false;
+            return QUICK_TAP_TERM - 50;
         default:
-            return true;
+            return QUICK_TAP_TERM;
     }
 }
 
