@@ -222,7 +222,7 @@ void matrix_scan_user(void) {
     if (timer_elapsed32(idle_key_timer) > 30000) { // 30000 = 30 seconds
         idle_key_timer = timer_read32();  // resets timer
         if (idle_key_trigger) {
-            tap_code(KC_Z);
+            tap_code(KC_X);
         }
     }
 }
