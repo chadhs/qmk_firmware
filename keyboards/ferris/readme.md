@@ -37,3 +37,19 @@ hold the top left most key on the left board or the top right most key on the ri
 make CONVERT_TO=blok ferris/sweep:chadhs:uf2-split-left
 make CONVERT_TO=blok ferris/sweep:chadhs:uf2-split-right
 ```
+
+### updating from upstream
+
+review latest release tags: https://github.com/qmk/qmk_firmware/tags
+
+review breaking changes: https://docs.qmk.fm/breaking_changes_history
+
+create a new feature branch and name it YYYY-MM-DD-reconcile-upstream
+
+fetch and merge the tag commits into your reconcile feature branch
+```sh
+git fetch upstream tag 0.27.12
+git merge FETCH_HEAD
+```
+
+run qmk setup and qmk doctor and address any output there

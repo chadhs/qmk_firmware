@@ -37,7 +37,7 @@
 
 // https://docs.qmk.fm/#/feature_rgblight?id=configuration
 #define RGBLIGHT_LIMIT_VAL 72
-#define RGBLED_NUM 2
+#define RGBLIGHT_LED_COUNT 2
 #define RGBLED_SPLIT { 1, 1 }
 #define WS2812_DI_PIN 25 // renamed from RGB_DI_PIN
 #define RGBLIGHT_EFFECT_RGB_TEST // at least one animation has to be enabled

@@ -1,0 +1,38 @@
+{
+  "features": {
+    "rgblight": true
+  },
+  "matrix_pins": {
+    "cols": ["F4", "F5", "F6", "F7", "B1"],
+    "rows": ["B2", "B6", "B4", "B5"]
+  },
+  "usb": {
+    "device_version": "1.0.0"
+  },
+  "split": {
+    "serial": {
+      "pin": "D2"
+    }
+  },
+  "rgblight": {
+    "sleep": true,
+    "led_count": 12,
+    "split_count": [6, 6],
+    "max_brightness": 150,
+    "animations": {
+      "alternating": false,
+      "breathing": false,
+      "christmas": false,
+      "knight": false,
+      "rainbow_mood": false,
+      "rainbow_swirl": false,
+      "rgb_test": true,
+      "snake": false,
+      "static_gradient": false,
+      "twinkle": false
+    }
+  },
+  "ws2812": {
+    "pin": "D3"
+  }
+}
