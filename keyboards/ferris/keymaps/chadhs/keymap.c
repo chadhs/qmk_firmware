@@ -121,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     | KVM4 | KVM3 | KVM2 | KVM1 | F6   |            | ←    | ↓    | ↑    | →    | ↓↓↓  |
     |      |      |      |      |      |            |      |      |      |      |      |
     |------+------+------+------+------|            |------+------+------+------+------|
-    | IDLE |      |      |      |      |            | ^    | VIDN | VIUP | RBG  | GAME |
+    |      |      |      |      |      |            | ^    | VIDN | VIUP | RBG  | GAME |
     |      |      |      |      |      |            |      |      |      | TOG  | TOG  |
     '------'------'------'------'------'            '------'------'------'------'------'
                             .------.------.      .------.------.
@@ -131,7 +131,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,      KC_MPRV, KC_MNXT,  KC_MPLY,  KC_VOLD,  KC_VOLU,
     TD_KVM4, TD_KVM3, TD_KVM2, TD_KVM1, KC_F6,      KC_LEFT, KC_DOWN,  KC_UP,    KC_RIGHT, _______,
-    NO_IDLE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_CIRC, VIM_CTLD, VIM_CTLU, RGB_TOG,  GAME_TOG,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_CIRC, VIM_CTLD, VIM_CTLU, RGB_TOG,  GAME_TOG,
                                _______, KC_ESC,     _______, _______
   ),
 
