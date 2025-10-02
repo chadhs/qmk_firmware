@@ -54,3 +54,10 @@ dd:
       - data/constants/**
       - data/mappings/**
       - data/schemas/**
+<<<<<<< HEAD
+=======
+community_module:
+  - changed-files:
+    - any-glob-to-any-file:
+      - modules/**
+>>>>>>> 0.30.3

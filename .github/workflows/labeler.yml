@@ -10,4 +10,8 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
+<<<<<<< HEAD
     - uses: actions/labeler@v5
+=======
+    - uses: actions/labeler@v6
+>>>>>>> 0.30.3

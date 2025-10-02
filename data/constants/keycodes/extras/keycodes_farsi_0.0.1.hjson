@@ -527,7 +527,11 @@
             "key": "FA_PIPE",
             "label": "|",
         }
+<<<<<<< HEAD
         "ALGR(FA_RA)": {
+=======
+        "ALGR(FA_RE)": {
+>>>>>>> 0.30.3
             "key": "FA_SUBA",
             "label": "ٖ",
         }

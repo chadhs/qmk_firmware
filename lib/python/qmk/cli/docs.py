@@ -22,6 +22,7 @@ def docs(cli):
     if not prepare_docs_build_area(is_production=False):
         return False
 
-    if not cli.config.general.verbose:
-        cli.log.info('Serving docs at http://localhost:5173/ (Ctrl+C to stop)')
-    run_docs_command('run', 'docs:dev')
+    cmd = ['docs:dev', '--port', f'{cli.args.port}']
+    if cli.args.browser:
+        cmd.append('--open')
+    run_docs_command('run', cmd)

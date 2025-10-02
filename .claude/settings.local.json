@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(qmk setup:*)",
+      "Bash(qmk doctor:*)",
+      "Bash(grep:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

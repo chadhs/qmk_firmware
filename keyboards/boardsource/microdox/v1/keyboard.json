@@ -20,16 +20,16 @@
     "split_count": [6, 6],
     "max_brightness": 150,
     "animations": {
-      "alternating": false,
-      "breathing": false,
-      "christmas": false,
-      "knight": false,
-      "rainbow_mood": false,
-      "rainbow_swirl": false,
+      "alternating": true,
+      "breathing": true,
+      "christmas": true,
+      "knight": true,
+      "rainbow_mood": true,
+      "rainbow_swirl": true,
       "rgb_test": true,
-      "snake": false,
-      "static_gradient": false,
-      "twinkle": false
+      "snake": true,
+      "static_gradient": true,
+      "twinkle": true
     }
   },
   "ws2812": {
