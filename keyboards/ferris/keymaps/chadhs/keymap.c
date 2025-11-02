@@ -233,7 +233,7 @@ void dance_kvm_1 (tap_dance_state_t *state, void *user_data) {
         SEND_STRING(SS_TAP(X_A));
         reset_tap_dance (state);
     } else if (state->count >= 2) {
-        SEND_STRING(SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_1));
+        SEND_STRING(SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_1) SS_DELAY(100) SS_TAP(X_ENT));
         reset_tap_dance (state);
     }
 }
@@ -242,7 +242,7 @@ void dance_kvm_2 (tap_dance_state_t *state, void *user_data) {
         SEND_STRING(SS_TAP(X_R));
         reset_tap_dance (state);
     } else if (state->count >= 2) {
-        SEND_STRING(SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_2));
+        SEND_STRING(SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_2) SS_DELAY(100) SS_TAP(X_ENT));
         reset_tap_dance (state);
     }
 }
@@ -251,7 +251,7 @@ void dance_kvm_3 (tap_dance_state_t *state, void *user_data) {
         SEND_STRING(SS_TAP(X_S));
         reset_tap_dance (state);
     } else if (state->count >= 2) {
-        SEND_STRING(SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_3));
+        SEND_STRING(SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_3) SS_DELAY(100) SS_TAP(X_ENT));
         reset_tap_dance (state);
     }
 }
@@ -260,7 +260,7 @@ void dance_kvm_4 (tap_dance_state_t *state, void *user_data) {
         SEND_STRING(SS_TAP(X_T));
         reset_tap_dance (state);
     } else if (state->count >= 2) {
-        SEND_STRING(SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_4));
+        SEND_STRING(SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_RCTL) SS_DELAY(100) SS_TAP(X_4) SS_DELAY(100) SS_TAP(X_ENT));
         reset_tap_dance (state);
     }
 }
