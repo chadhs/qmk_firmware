@@ -196,15 +196,3 @@ report_mouse_t paw3204_get_report(report_mouse_t mouse_report) {
 
     return mouse_report;
 }
-
-report_mouse_t paw3204_get_report(report_mouse_t mouse_report) {
-    report_paw3204_t data = paw3204_read();
-    if (data.isMotion) {
-        pd_dprintf("Raw ] X: %d, Y: %d\n", data.x, data.y);
-
-        mouse_report.x = data.x;
-        mouse_report.y = data.y;
-    }
-
-    return mouse_report;
-}

@@ -99,8 +99,6 @@ def find_keyboard_from_dir():
             keymap_index = len(current_path.parts) - current_path.parts.index('keymaps') - 1
             current_path = current_path.parents[keymap_index]
 
-        current_path = resolve_keyboard(current_path)
-
         if qmk.path.is_keyboard(current_path):
             return str(current_path)
 
@@ -177,14 +175,18 @@ def keyboard_completer(prefix, action, parser, parsed_args):
     return list_keyboards()
 
 
+@lru_cache(maxsize=None)
 def list_keyboards():
-    """Returns a list of all keyboards
+    """Returns a list of all keyboards.
     """
     # We avoid pathlib here because this is performance critical code.
     kb_wildcard = os.path.join(base_path, "**", 'keyboard.json')
     paths = [path for path in glob(kb_wildcard, recursive=True) if os.path.sep + 'keymaps' + os.path.sep not in path]
 
     found = map(_find_name, paths)
+
+    # Convert to posix paths for consistency
+    found = map(lambda x: str(Path(x).as_posix()), found)
 
     return sorted(set(found))
 

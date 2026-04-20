@@ -17,9 +17,6 @@ from qmk.compilation_database import write_compilation_database
 # These must be kept in the order in which they're applied to $(TARGET) in the makefiles in order to ensure consistency.
 TARGET_FILENAME_MODIFIERS = ['FORCE_LAYOUT', 'CONVERT_TO']
 
-# These must be kept in the order in which they're applied to $(TARGET) in the makefiles in order to ensure consistency.
-TARGET_FILENAME_MODIFIERS = ['FORCE_LAYOUT', 'CONVERT_TO']
-
 
 class BuildTarget:
     def __init__(self, keyboard: str, keymap: str, json: Union[dict, Dotty] = None):
