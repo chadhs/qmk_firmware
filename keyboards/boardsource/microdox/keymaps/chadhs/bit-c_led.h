@@ -6,25 +6,22 @@
 #define LED_DIM         1
 #define LED_OFF         0
 
-#define GPIO_STATE_LOW  0
-#define GPIO_STATE_HIGH 1
-
 #define PIN_LED         F0
 
 void set_bit_c_LED(uint8_t mode) {
     switch(mode) {
         case LED_ON:
-            setPinOutput(PIN_LED);
-            writePin(PIN_LED, GPIO_STATE_HIGH);
+            gpio_set_pin_output(PIN_LED);
+            gpio_write_pin_high(PIN_LED);
         break;
 
         case LED_DIM:
-            setPinInput(PIN_LED);
+            gpio_set_pin_input(PIN_LED);
         break;
 
         case LED_OFF:
-            setPinOutput(PIN_LED);
-            writePin(PIN_LED, GPIO_STATE_LOW);
+            gpio_set_pin_output(PIN_LED);
+            gpio_write_pin_low(PIN_LED);
         break;
 
         default:
