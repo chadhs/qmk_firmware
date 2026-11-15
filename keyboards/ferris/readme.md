@@ -30,7 +30,10 @@ i am using the sweep with the blok mcus and with my own keymap.
 
 flash each side independently with the trrs cable disconnected.
 
-hold the top left most key on the left board or the top right most key on the right board while plugging in the side.
+For routine updates, enter the Blok bootloader by double-tapping the reset button
+within 500 ms. This avoids invalidating saved settings. Holding the top left key
+on the left board or the top right key on the right board while plugging in uses
+Bootmagic, which invalidates EEPROM configuration and can reset lighting settings.
 
 ```sh
 make CONVERT_TO=blok ferris/sweep:chadhs:uf2-split-left
@@ -39,16 +42,6 @@ make CONVERT_TO=blok ferris/sweep:chadhs:uf2-split-right
 
 ### updating from upstream
 
-review latest release tags: https://github.com/qmk/qmk_firmware/tags
-
-review breaking changes: https://docs.qmk.fm/breaking_changes_history
-
-create a new feature branch and name it YYYY-MM-DD-reconcile-upstream
-
-fetch and merge the tag commits into your reconcile feature branch
-```sh
-git fetch upstream tag 0.27.12
-git merge FETCH_HEAD
-```
-
-run qmk setup and qmk doctor and address any output there
+Follow the [personal keyboard maintenance guide](../../docs/chadhs-maintenance.md).
+It covers pinned upstream releases, regular merge commits, left/right build-only
+commands, saved settings, hardware checks, and rollback.

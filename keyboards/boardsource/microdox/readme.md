@@ -17,6 +17,12 @@ See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_to
 
 ## my notes
 
+See the [personal keyboard maintenance guide](../../../docs/chadhs-maintenance.md)
+before updating or flashing. The historical DFU instructions below differ from
+the inherited Caterina build setting. Confirm the installed controller and
+bootloader before using these commands; the reconciliation preserves that build
+setting until the hardware is confirmed.
+
 ### build and flash
 
 flash each side independently with the trrs cable disconnected.
