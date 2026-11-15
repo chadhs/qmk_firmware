@@ -192,6 +192,13 @@ before hardware work.
 
 ## Hardware acceptance
 
+For the confirmed Bit-C Microdox with working handedness, use
+`make boardsource/microdox/v1:chadhs:dfu` separately on each half. The ordinary
+DFU target flashes application firmware without writing an EEPROM image.
+Reserve `dfu-split-left/right` for initial setup or handedness recovery: their
+EEPROM images also zero the configuration magic and saved settings, including
+lighting. They are not settings-preserving routine update commands.
+
 Flash one half at a time with the TRRS cable disconnected. Disconnect power
 before reconnecting the split cable. Use matching firmware versions on both
 halves before testing the assembled keyboard. Keep the other keyboard available.
@@ -226,7 +233,8 @@ are in `existing-firmware/`. The fresh baseline Sweep UF2 is generic and relies
 on stored handedness. If handedness is missing or incorrect, rebuild the backup
 ref with its recorded submodule revisions and generate separate left/right UF2s
 using the build-only commands above. Microdox uses the confirmed Atmel DFU
-bootloader; its DFU split targets also set EEPROM handedness. For new recovery
+bootloader. Use ordinary `:dfu` when handedness is intact; its DFU split targets
+set handedness but also reset saved configuration, including lighting. For new recovery
 builds, pass `BOOTLOADER=atmel-dfu` when building the original backup ref, whose
 inherited setting was Caterina.
 
