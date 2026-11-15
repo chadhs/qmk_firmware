@@ -38,7 +38,7 @@ tool settings. The saved VIA files are retained for reference; neither active
 `chadhs` build enables VIA. QMK core, drivers, build tooling, and submodule pins
 match the pinned upstream release.
 
-CI-only exceptions are in `.github/workflows/bootstrap_testing.yml`. The
+CI-only bootstrap exceptions are in `.github/workflows/bootstrap_testing.yml`. The
 Debian 11 container uses `archive.debian.org/debian-security` for security
 packages. Its live security mirror returned 404s before repository checkout.
 [Debian 11 LTS ended on August 31, 2026](https://www.debian.org/News/2026/20260831).
@@ -49,6 +49,15 @@ The macOS matrix omits the retired `macos-14` runner, which GitHub rejects befor
 executing any job steps. GitHub Actions
 [retired macOS 14 on November 2, 2026](https://github.blog/changelog/2026-10-01-github-actions-macos-14-runner-image-retirement/).
 The existing macOS 15 and 26 jobs still cover both Apple Silicon and Intel.
+
+For this fork, keyboard lint compares against the ancestor commit recorded in
+`.github/qmk-upstream-base`, rather than re-linting every imported upstream board
+against the old personal branch. All 49 files reported for missing license
+headers in the initial keyboard lint run matched upstream 0.34.8 byte for byte.
+Fork-specific keyboard changes still receive lint/format checks, both personal
+keymaps always receive strict lint, and global target/alias checks remain enabled.
+Update the recorded commit to the reviewed upstream tag on every sync; the job
+fails if that commit is missing or is not an ancestor of the tested branch.
 
 ## Behavior to preserve
 
@@ -91,6 +100,8 @@ setting; build success does not resolve that discrepancy.
    `git submodule update --init --recursive`; do not update them to arbitrary
    newest revisions. Inspect `git diff <tag>` to explain every remaining fork
    difference.
+   Update `.github/qmk-upstream-base` to the selected tag's full commit SHA so
+   fork keyboard lint uses the same release baseline.
 3. Build both baseline and candidate targets in clean build directories. Compare
    generated `info_config.h`, `info_rules.mk`, layouts, enabled features, custom
    source, and flash sizes. Retain firmware and build logs separately for each

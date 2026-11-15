@@ -7,6 +7,8 @@ on:
   pull_request:
     paths:
     - 'keyboards/**'
+    - '.github/workflows/lint.yml'
+    - '.github/qmk-upstream-base'
 
 jobs:
   lint:
@@ -42,6 +44,19 @@ jobs:
       shell: 'bash {0}'
       run: |
         QMK_CHANGES=$(echo -e '${{ steps.file_changes.outputs.all_changed_files}}' | sed 's/ /\n/g')
+
+        if [[ "$GITHUB_REPOSITORY" == "chadhs/qmk_firmware" ]]; then
+          # An upstream sync imports keyboards that can have existing lint debt.
+          # Lint every fork change against the recorded upstream release instead.
+          UPSTREAM_BASE=$(cat .github/qmk-upstream-base) || exit 1
+          git merge-base --is-ancestor "$UPSTREAM_BASE" HEAD || exit 1
+          QMK_CHANGES=$(git diff --name-only --diff-filter=ACMR "$UPSTREAM_BASE" HEAD -- keyboards/) || exit 1
+
+          # Parent-directory keymap/config changes are missed by the loop below.
+          qmk lint --strict --keyboard boardsource/microdox/v1 --keymap chadhs || exit 1
+          qmk lint --strict --keyboard ferris/sweep --keymap chadhs || exit 1
+        fi
+
         QMK_KEYBOARDS=$(qmk list-keyboards)
 
         exit_code=0
@@ -62,8 +77,8 @@ jobs:
           fi
         done
 
-        qmk format-text ${{ steps.file_changes.outputs.all_changed_files}} || true
-        for file in ${{ steps.file_changes.outputs.all_changed_files}}; do
+        qmk format-text $QMK_CHANGES || true
+        for file in $QMK_CHANGES; do
           if [[ -f $file ]]; then
             if ! git diff --quiet $file; then
               echo "File '${file}' Requires Formatting"
