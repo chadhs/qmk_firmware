@@ -18,7 +18,9 @@ before a release is marked validated.
   their original build settings and whether they are currently flashed are not
   established. `baseline-builds/` contains fresh builds of the source baseline.
   `updated-builds/` contains candidate firmware, generated settings, and logs.
-- Hardware acceptance is pending. No firmware was flashed during reconciliation.
+- Hardware accepted on November 15, 2026: the owner flashed both halves of both
+  keyboards from this branch and reported that everything works as expected.
+  Firmware source at acceptance: `085490b84c923e3d8d296831e1714861e4f09a9c`.
 
 The April sync was squash-merged. Its preserved `codex/qmk-2026-sync` branch had
 an identical tree, so merging that branch restored ancestry without changing
@@ -203,7 +205,7 @@ Flash one half at a time with the TRRS cable disconnected. Disconnect power
 before reconnecting the split cable. Use matching firmware versions on both
 halves before testing the assembled keyboard. Keep the other keyboard available.
 
-Complete these checks separately for Microdox and Sweep:
+For each future update, complete these checks separately for Microdox and Sweep:
 
 - [ ] Every physical key and all five layers match the existing layout. Both
   halves work, with the expected handedness and USB connection behavior.
@@ -219,7 +221,21 @@ Complete these checks separately for Microdox and Sweep:
 - [ ] A normal typing session and power cycle reveal no regressions. Record the
   date, firmware checksum, and result before tagging the release validated.
 
-Current result: neither keyboard has completed this checklist for 0.34.8.
+Current result: the owner accepted both keyboards on November 15, 2026, after
+successfully flashing them with these commands and testing their behavior:
+
+```sh
+make CONVERT_TO=blok ferris/sweep:chadhs:uf2-split-right
+make CONVERT_TO=blok ferris/sweep:chadhs:uf2-split-left
+make boardsource/microdox/v1:chadhs:dfu-split-right
+make boardsource/microdox/v1:chadhs:dfu-split-left
+```
+
+The Microdox split targets reset saved EEPROM configuration during this update;
+both keyboards were nevertheless reported working as expected afterward. Use
+the ordinary Microdox `:dfu` target for future updates when handedness is intact.
+This acceptance records the owner's overall report; individual checklist items
+above remain a reusable test template rather than a separately observed test log.
 
 ## Recovery
 
