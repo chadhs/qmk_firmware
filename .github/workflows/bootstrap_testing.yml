@@ -82,6 +82,18 @@ jobs:
     steps:
       - name: Install base dependencies
         run: |
+          # Bullseye security packages moved after Debian 11 LTS ended.
+          # Keep testing the old distribution using its signed archive.
+          if [ "${{ matrix.distribution }}" = "debian:11" ]; then
+            for apt_sources in /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
+              [ -f "$apt_sources" ] || continue
+              sed -i \
+                -e 's@deb.debian.org/debian-security@archive.debian.org/debian-security@g' \
+                -e 's@security.debian.org/debian-security@archive.debian.org/debian-security@g' \
+                "$apt_sources"
+            done
+          fi
+
           # Attempt to run the package installation up to 10 times to mitigate transient network issues
           ok=''
           for n in $(seq 1 10); do
