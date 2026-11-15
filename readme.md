@@ -19,9 +19,10 @@ This is my personal fork of QMK to configure the keyboards I use.
 
 ### Merging upstream changes
 
-```sh
-git pull https://github.com/qmk_qmk_firmware.git master
-```
+Follow the [personal keyboard maintenance guide](docs/chadhs-maintenance.md) for
+upstream updates, firmware backups, validation, and recovery. Use regular merge
+commits for synchronization branches and their pull requests; squash merges lose
+the upstream ancestry needed by the next update.
 
 ## Documentation
 
