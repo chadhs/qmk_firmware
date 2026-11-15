@@ -131,15 +131,6 @@ def via2json(cli):
         via_backup = json.load(fd)
 
     keyboard_data = info_json(cli.args.keyboard)
-    if not keyboard_data:
-        cli.log.error(f'LAYOUT macro {keymap_layout} is not a valid one for keyboard {cli.args.keyboard}!')
-        return False
-
-    # Find appropriate layout macro
-    keymap_layout = cli.args.layout if cli.args.layout else _find_via_layout_macro(keyboard_data)
-    if not keymap_layout:
-        cli.log.error(f"Couldn't find LAYOUT macro for keyboard {cli.args.keyboard}. Please specify it with the '-l' argument.")
-        return False
 
     # Find appropriate layout macro
     keymap_layout = cli.args.layout if cli.args.layout else _find_via_layout_macro(keyboard_data)

@@ -22,7 +22,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "action_tapping.h"
 #include "timer.h"
 #include "keycode_config.h"
-#include "usb_device_state.h"
 #include <string.h>
 
 extern keymap_config_t keymap_config;
