@@ -158,8 +158,10 @@ in the test run. Generated keyboard settings and expanded custom keymap, combo,
 and lighting code matched the baseline. Compiled keymap and lighting segment
 data also matched byte for byte. The initial Microdox build with the inherited
 Caterina setting used 25,168 bytes versus 25,186 in the baseline, out of 28,672;
-the final Bit-C DFU build is recorded separately in
-`updated-builds/microdox-dfu/`. Sweep ELF text size changed from 49,880 to 49,912 bytes.
+the final Bit-C DFU build uses 25,262 bytes, leaving 3,410 bytes free, and is
+recorded separately in `updated-builds/microdox-dfu/`. Its expanded custom code
+and compiled keymap, combo, and lighting data still match the baseline. Sweep
+ELF text size changed from 49,880 to 49,912 bytes.
 Separate Sweep left/right build-only variants passed with the expected
 handedness defines. These results do not establish hardware acceptance.
 
