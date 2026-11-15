@@ -38,12 +38,17 @@ tool settings. The saved VIA files are retained for reference; neither active
 `chadhs` build enables VIA. QMK core, drivers, build tooling, and submodule pins
 match the pinned upstream release.
 
-One CI-only exception is in `.github/workflows/bootstrap_testing.yml`: the
+CI-only exceptions are in `.github/workflows/bootstrap_testing.yml`. The
 Debian 11 container uses `archive.debian.org/debian-security` for security
 packages. Its live security mirror returned 404s before repository checkout.
 [Debian 11 LTS ended on August 31, 2026](https://www.debian.org/News/2026/20260831).
 The archived repository retains signature verification, and the Debian 11 test
 remains enabled. Revisit this override when upstream updates that CI job.
+
+The macOS matrix omits the retired `macos-14` runner, which GitHub rejects before
+executing any job steps. GitHub Actions
+[retired macOS 14 on November 2, 2026](https://github.blog/changelog/2026-10-01-github-actions-macos-14-runner-image-retirement/).
+The existing macOS 15 and 26 jobs still cover both Apple Silicon and Intel.
 
 ## Behavior to preserve
 

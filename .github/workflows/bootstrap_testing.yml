@@ -206,7 +206,6 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - macos-14        # Apple Silicon ARM64
           - macos-15        # Apple Silicon ARM64
           - macos-15-intel  # Intel x64
           - macos-26        # Apple Silicon ARM64
