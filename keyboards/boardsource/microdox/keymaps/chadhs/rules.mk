@@ -1,3 +1,4 @@
+BOOTLOADER = atmel-dfu # Bit-C controllers
 OLED_DRIVER_ENABLE = no
 TAP_DANCE_ENABLE = yes
 RGBLIGHT_ENABLE = yes

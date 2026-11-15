@@ -81,10 +81,12 @@ layers, or reset EEPROM as incidental cleanup. Move the Microdox feature
 overrides from its shared `info.json` into keymap configuration only in a separate
 change with equivalent generated settings verified.
 
-The inherited Microdox build uses `BOOTLOADER=caterina`, while the personal
-flashing notes use DFU and the keymap controls a Bit-C LED. Confirm the physical
-controller and bootloader before flashing. This update keeps the inherited
-setting; build success does not resolve that discrepancy.
+The owner confirmed that both keyboards' current behavior is correct and that
+Microdox uses Bit-C controllers with DFU. The personal Microdox keymap now sets
+`BOOTLOADER=atmel-dfu`, replacing the inherited Caterina setting to match the
+installed bootloader and existing flashing procedure. This is the intentional
+build-configuration difference from the archived source baseline; layouts,
+timings, combos, and lighting remain unchanged.
 
 ## Repeatable upstream update
 
@@ -154,8 +156,10 @@ The 0.34.8 software checks passed: both clean firmware builds, both strict lint
 checks, and 237 tests across the 10 executables above, with no compiler warnings
 in the test run. Generated keyboard settings and expanded custom keymap, combo,
 and lighting code matched the baseline. Compiled keymap and lighting segment
-data also matched byte for byte. Microdox flash usage changed from 25,186 to
-25,168 bytes out of 28,672; Sweep ELF text size changed from 49,880 to 49,912 bytes.
+data also matched byte for byte. The initial Microdox build with the inherited
+Caterina setting used 25,168 bytes versus 25,186 in the baseline, out of 28,672;
+the final Bit-C DFU build is recorded separately in
+`updated-builds/microdox-dfu/`. Sweep ELF text size changed from 49,880 to 49,912 bytes.
 Separate Sweep left/right build-only variants passed with the expected
 handedness defines. These results do not establish hardware acceptance.
 
@@ -219,9 +223,10 @@ Fresh baseline builds are in `baseline-builds/`, and untouched preexisting files
 are in `existing-firmware/`. The fresh baseline Sweep UF2 is generic and relies
 on stored handedness. If handedness is missing or incorrect, rebuild the backup
 ref with its recorded submodule revisions and generate separate left/right UF2s
-using the build-only commands above. The Microdox recovery flash method depends
-on confirming its actual bootloader; its historical DFU split targets also set
-EEPROM handedness.
+using the build-only commands above. Microdox uses the confirmed Atmel DFU
+bootloader; its DFU split targets also set EEPROM handedness. For new recovery
+builds, pass `BOOTLOADER=atmel-dfu` when building the original backup ref, whose
+inherited setting was Caterina.
 
 For source recovery, use the backup branch in a separate checkout or restore it
 only after saving current work. Restore its exact submodule revisions before
